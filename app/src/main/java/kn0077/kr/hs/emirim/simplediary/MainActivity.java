@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         Calendar cal = Calendar.getInstance();//static메서드 캘린더(추상클래스)를 사용할 수 있도록 하는 현재객체 클래스의 참조값을 반환
         int year=cal.get(Calendar.YEAR);
-        final int month = cal.get(Calendar.MONTH);
+        int month = cal.get(Calendar.MONTH); //보여지는 값은 1~12이나, 실제 데이터 값은 0~11이므로 onDateChanged()에서 month+1을 해줌
         int day=cal.get(Calendar.DATE);
 
         date.init(year, month, day, new DatePicker.OnDateChangedListener() {
