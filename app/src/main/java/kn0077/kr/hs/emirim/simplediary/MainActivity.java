@@ -8,6 +8,9 @@ import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,6 +45,22 @@ public class MainActivity extends AppCompatActivity {
     }
     public String readDiary(String fileName){
 
-        return null;
+        String diaryStr=null;
+        FileInputStream fIn=null;
+
+        try {
+            fIn=openFileInput(fileName);
+            byte[] buf=new byte[500];
+            fIn.read(buf);
+            diaryStr=new String(buf).trim();
+            but.setText("수정 하기");
+        } catch (FileNotFoundException e) { // IOException으로 처리해주어도 상관없음
+            edit.setText("일기가 존재하지 않습니다."); // 파일이 없을 때
+            but.setText("새로 저장");
+        } catch (IOException e) {
+
+        }
+
+        return diaryStr;
     }
 }
